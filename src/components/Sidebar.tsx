@@ -1,4 +1,3 @@
-import React from "react";
 import { CiHome, CiEdit, CiBoxList, CiLogin, CiSettings } from "react-icons/ci";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../api/user";
