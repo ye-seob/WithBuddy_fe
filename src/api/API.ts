@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://localhost:3000/api",
+  baseURL: `${import.meta.env.VITE_API_BASE_URL}`,
   withCredentials: true,
 });
 
@@ -52,7 +52,9 @@ const getCookie = (name: string): string | undefined => {
 };
 const refreshToken = async () => {
   try {
-    await axios.post("http://localhost:3000/api/auth/refreshToken");
+    await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/refreshToken`, {
+      withCredentials: true,
+    });
   } catch (error) {
     console.error("토큰 재발급 실패", error);
     throw error;

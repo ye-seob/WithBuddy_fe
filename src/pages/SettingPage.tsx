@@ -26,8 +26,9 @@ const SettingPage = () => {
 
   const handleDeleteUser = async () => {
     try {
-      await axios.delete("http://localhost:3000/api/deleteUser", {
+      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/deleteUser`, {
         data: { studentId },
+        withCredentials: true,
       });
       alert("회원이 삭제되었습니다.");
 

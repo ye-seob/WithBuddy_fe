@@ -8,13 +8,16 @@ export const editUserInfo = async (
   newKakaoId?: string
 ): Promise<void> => {
   try {
-    const response = await instance.put("http://localhost:3000/api/user/edit", {
-      newName,
-      newPin: newPin || undefined,
-      studentId,
-      newInstaId,
-      newKakaoId,
-    });
+    const response = await instance.put(
+      `${import.meta.env.VITE_API_BASE_URL}/user/edit`,
+      {
+        newName,
+        newPin: newPin || undefined,
+        studentId,
+        newInstaId,
+        newKakaoId,
+      }
+    );
     if (response.status !== 200) {
       throw new Error("정보 수정 실패");
     }

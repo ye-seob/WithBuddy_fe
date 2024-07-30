@@ -29,8 +29,11 @@ axios.defaults.withCredentials = true;
 export const signup = async (data: SignupData): Promise<string> => {
   try {
     const response = await axios.post(
-      "http://localhost:3000/api/user/signup",
-      data
+      `${import.meta.env.VITE_API_BASE_URL}/user/signup`,
+      data,
+      {
+        withCredentials: true,
+      }
     );
     return response.data;
   } catch (error) {
@@ -41,8 +44,11 @@ export const signup = async (data: SignupData): Promise<string> => {
 export const login = async (data: LoginData): Promise<LoginResponse> => {
   try {
     const response = await axios.post(
-      "http://localhost:3000/api/user/login",
-      data
+      `${import.meta.env.VITE_API_BASE_URL}/user/login`,
+      data,
+      {
+        withCredentials: true,
+      }
     );
     return response.data;
   } catch (error) {
@@ -53,7 +59,12 @@ export const login = async (data: LoginData): Promise<LoginResponse> => {
 
 export const logout = async (): Promise<number> => {
   try {
-    const response = await axios.post("http://localhost:3000/api/user/logout");
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_BASE_URL}/user/logout`,
+      {
+        withCredentials: true,
+      }
+    );
     return response.status;
   } catch (error) {
     console.error("로그아웃 실패:", error);

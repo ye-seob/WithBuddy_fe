@@ -3,9 +3,15 @@ import axios from "axios";
 
 export const sendMail = async (email: string) => {
   try {
-    const response = await axios.post("http://localhost:3000/api/send-mail", {
-      email,
-    });
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_BASE_URL}/send-mail`,
+      {
+        email,
+      },
+      {
+        withCredentials: true,
+      }
+    );
     return response.status;
   } catch (error) {
     console.error("메일 전송 실패:", error);
@@ -15,10 +21,13 @@ export const sendMail = async (email: string) => {
 export const sendFindMail = async (email: string, studentId: string) => {
   try {
     const response = await axios.post(
-      "http://localhost:3000/api/mail/send-findPin-mail",
+      `${import.meta.env.VITE_API_BASE_URL}/mail/send-findPin-mail`,
       {
         email,
         studentId,
+      },
+      {
+        withCredentials: true,
       }
     );
     return response.status;
@@ -33,10 +42,13 @@ export const checkAuthCode = async (
 ): Promise<string> => {
   try {
     const response = await axios.post(
-      "http://localhost:3000/api/mail/checkAuthCode",
+      `${import.meta.env.VITE_API_BASE_URL}/mail/checkAuthCode`,
       {
         email,
         authCode,
+      },
+      {
+        withCredentials: true,
       }
     );
 
