@@ -1,0 +1,51 @@
+.header_section {
+  width: 100%;
+  min-height: 50px;
+  background-color: #c6d1ae;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  color: white;
+  font-weight: bold;
+}
+
+.form {
+  width: 100%;
+  padding: 250px 0px 50px 0px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.text {
+  color: white;
+  font-weight: bold;
+}
+
+.label {
+  color: #a9bd7d;
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 10px;
+  border-bottom: 1px solid #a9bd7d;
+}
+
+.form::-webkit-scrollbar {
+  width: 8px;
+}
+
+.form::-webkit-scrollbar-thumb {
+  background-color: #c6d1ae;
+  border-radius: 4px;
+}
+
+.form::-webkit-scrollbar-track {
+  background-color: #d2d2d2;
+}

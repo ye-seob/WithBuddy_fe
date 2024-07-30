@@ -1,0 +1,75 @@
+.header_section {
+  width: 100%;
+  min-height: 50px;
+  background-color: #c6d1ae;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text {
+  color: white;
+  font-weight: bold;
+}
+
+.info_section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+}
+.infoText {
+  color: #333;
+  font-weight: bold;
+}
+.info_item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.info_item:hover {
+  opacity: 0.8;
+}
+
+.icon {
+  color: #a9bd7d;
+  margin-right: 10px;
+  font-size: 30px;
+}
+.modal {
+  width: 290px;
+  height: 170px;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  background: #f7f6f0;
+  text-align: center;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+}
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 10px;
+  margin-top: 60px;
+}
