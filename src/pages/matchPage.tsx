@@ -55,7 +55,7 @@ const MatchPage: React.FC = () => {
             </div>
           ))
         ) : (
-          <div>Loading...</div>
+          <div>Loading..</div>
         )}
       </div>
     </>
