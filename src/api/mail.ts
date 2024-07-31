@@ -4,7 +4,7 @@ import axios from "axios";
 export const sendMail = async (email: string) => {
   try {
     const response = await axios.post(
-      `${import.meta.env.VITE_API_BASE_URL}/send-mail`,
+      `${import.meta.env.VITE_API_BASE_URL}/mail/send-mail`,
       {
         email,
       },
