@@ -26,7 +26,7 @@ const SettingPage = () => {
 
   const handleDeleteUser = async () => {
     try {
-      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/deleteUser`, {
+      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/user/deleteUser`, {
         data: { studentId },
         withCredentials: true,
       });
