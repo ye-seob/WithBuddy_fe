@@ -5,7 +5,8 @@ export const editUserInfo = async (
   newName: string,
   newPin?: string,
   newInstaId?: string,
-  newKakaoId?: string
+  newKakaoId?: string,
+  newBio?: string
 ): Promise<void> => {
   try {
     const response = await instance.put(
@@ -16,6 +17,7 @@ export const editUserInfo = async (
         studentId,
         newInstaId,
         newKakaoId,
+        newBio,
       }
     );
     if (response.status !== 200) {

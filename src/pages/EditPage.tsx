@@ -17,6 +17,7 @@ const EditPage: React.FC = () => {
     kakaoId,
     setInstaId,
     setKakaoId,
+    setBio,
   } = useUserStore();
 
   const [tempName, setTempName] = useState(name);
@@ -24,6 +25,7 @@ const EditPage: React.FC = () => {
   const [pinConfirm, setPinConfirm] = useState("");
   const [tempInstaId, setTempInstaId] = useState(instaId);
   const [tempKakaoId, setTempKakaoId] = useState(kakaoId);
+  const [tempBio, setTempBio] = useState("");
   const [alertMessage, setAlertMessage] = useState("");
   const [alertErrorMessage, setAlertErrorMessage] = useState("");
 
@@ -44,10 +46,18 @@ const EditPage: React.FC = () => {
     }
 
     try {
-      await editUserInfo(studentId, tempName, newPin, tempInstaId, tempKakaoId);
+      await editUserInfo(
+        studentId,
+        tempName,
+        newPin,
+        tempInstaId,
+        tempKakaoId,
+        tempBio
+      );
       setName(tempName);
       setInstaId(tempInstaId);
       setKakaoId(tempKakaoId);
+      setBio(tempBio);
       setAlertMessage("변경되었습니다.");
     } catch (error) {
       setAlertErrorMessage("변경에 실패하였습니다.");
@@ -86,13 +96,13 @@ const EditPage: React.FC = () => {
           }}
         />
         <Input
-          type="password"
+          type="text"
           placeholder="새로운 PIN번호"
           value={newPin}
           onChange={(e) => setNewPin(e.target.value)}
         />
         <Input
-          type="password"
+          type="text"
           placeholder="새로운 PIN번호 확인"
           value={pinConfirm}
           onChange={(e) => setPinConfirm(e.target.value)}
@@ -109,6 +119,13 @@ const EditPage: React.FC = () => {
           placeholder="카카오톡 아이디"
           value={tempKakaoId}
           onChange={(e) => setTempKakaoId(e.target.value)}
+        />
+        <label className={styles.label}>한줄 소개</label>
+        <Input
+          type="text"
+          placeholder="한줄소개를 입력해주세요 (최대 25자)"
+          value={tempBio}
+          onChange={(e) => setTempBio(e.target.value)}
         />
         <Button text="저장" onClick={handleSave} />
       </div>

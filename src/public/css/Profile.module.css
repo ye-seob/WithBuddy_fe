@@ -137,10 +137,10 @@
   z-index: 100;
 }
 
-.alertMessage.show {
-  opacity: 1;
-}
 .snsIdText {
   margin-left: 15px;
   font-weight: bolder;
+}
+.modalItem svg {
+  flex-shrink: 0;
 }

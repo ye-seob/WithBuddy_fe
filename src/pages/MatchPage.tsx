@@ -12,6 +12,7 @@ interface BuddyData {
   instaId: string | undefined;
   kakaoId: string | undefined;
   mbti: string;
+  bio: string | undefined;
 }
 
 const MatchPage: React.FC = () => {
@@ -51,6 +52,7 @@ const MatchPage: React.FC = () => {
                 instaId={buddy.instaId}
                 kakaoId={buddy.kakaoId}
                 mbti={buddy.mbti}
+                bio={buddy.bio}
               />
             </div>
           ))

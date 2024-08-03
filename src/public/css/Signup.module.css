@@ -1,14 +1,3 @@
-.error_message {
-  color: red;
-  font-size: 0.875em;
-  margin-bottom: 10px;
-}
-
-.success_message {
-  color: green;
-  font-size: 1em;
-  margin-bottom: 20px;
-}
 .label {
   color: #a9bd7d;
   font-weight: bold;

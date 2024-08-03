@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import styles from "../public/css/Profile.module.css";
-import { FaInstagram, FaUser, FaClipboard } from "react-icons/fa";
+import {
+  FaInstagram,
+  FaUser,
+  FaClipboard,
+  FaAddressCard,
+} from "react-icons/fa";
 import { RiKakaoTalkFill } from "react-icons/ri";
 interface ProfileProps {
   studentId: string;
@@ -9,8 +14,8 @@ interface ProfileProps {
   instaId: string | undefined;
   kakaoId: string | undefined;
   mbti: string;
+  bio: string | undefined;
 }
-
 Modal.setAppElement("#root");
 
 const Profile: React.FC<ProfileProps> = ({
@@ -19,6 +24,7 @@ const Profile: React.FC<ProfileProps> = ({
   instaId,
   kakaoId,
   mbti,
+  bio,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -97,6 +103,10 @@ const Profile: React.FC<ProfileProps> = ({
             <FaUser size={20} color="#6f7d47" />
             <span className={styles.snsIdText}>MBTI : {mbti}</span>
           </div>
+        </div>
+        <div className={styles.modalItem}>
+          <FaAddressCard size={20} color="#6495ED" />
+          <span className={styles.snsIdText}>한줄소개: {bio}</span>
         </div>
       </Modal>
       {alertMessage && (

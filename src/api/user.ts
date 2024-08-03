@@ -10,6 +10,7 @@ interface SignupData {
   instaId?: string;
   kakaoId?: string;
   mbti: string;
+  bio?: string;
 }
 
 interface LoginData {
@@ -26,6 +27,7 @@ interface LoginResponse {
 }
 
 axios.defaults.withCredentials = true;
+
 export const signup = async (data: SignupData): Promise<string> => {
   try {
     const response = await axios.post(
