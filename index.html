@@ -6,9 +6,24 @@
     <!-- 나중에 아이콘으로 바꿀 것 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>With Buddy</title>
+    <style>
+      @font-face {
+        font-family: "Ownglyph_eunbyul21-Rg";
+        src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2405-2@1.0/Ownglyph_eunbyul21-Rg.woff2")
+          format("woff2");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      body {
+        font-family: "Ownglyph_eunbyul21-Rg", sans-serif;
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      이 텍스트가 Ownglyph_eunbyul21-Rg 폰트로 표시되어야 합니다.
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

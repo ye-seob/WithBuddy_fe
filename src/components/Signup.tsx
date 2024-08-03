@@ -24,7 +24,7 @@ const Signup = () => {
   const [instaId, setInstaId] = useState("");
   const [kakaoId, setKakaoId] = useState("");
   const [mbti, setMbti] = useState("");
-  const [bio, setBio] = useState(""); // 한줄소개 상태 추가
+  const [bio, setBio] = useState("");
   const [checkedAuthCode, setCheckedAuthCode] = useState(false);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
