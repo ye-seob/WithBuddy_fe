@@ -24,6 +24,7 @@ interface LoginResponse {
   instaId?: string;
   kakaoId?: string;
   mbti: string;
+  bio?: string;
 }
 
 axios.defaults.withCredentials = true;

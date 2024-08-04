@@ -18,19 +18,21 @@ const Login = () => {
     setInstaId,
     setKakaoId,
     setMbti,
+    setBio,
   } = useUserStore();
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
       const response = await login({ studentId, pin });
-      const { userName, major, instaId, kakaoId, mbti } = response;
+      const { userName, major, instaId, kakaoId, mbti, bio } = response;
 
       setName(userName);
       setMajor(major);
       setInstaId(instaId);
       setKakaoId(kakaoId);
       setMbti(mbti);
+      setBio(bio);
       navigate("/match");
     } catch (error) {
       setAlertErrorMessage(
