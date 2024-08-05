@@ -241,14 +241,38 @@ const Signup = () => {
       >
         <div className={styles.modalContent}>
           <h2>입력한 정보가 맞습니까?</h2>
-          <p>이름: {name}</p>
-          <p>학번: {studentId}</p>
-          <p>전공: {major}</p>
-          <p>Email: {email}</p>
-          <p>인스타 아이디: {instaId}</p>
-          <p>카카오톡 아이디: {kakaoId}</p>
-          <p>MBTI: {mbti}</p>
-          <p>한줄소개: {bio}</p> {/* 한줄소개 추가 */}
+          <div className={styles.row}>
+            <span className={styles.label}>이름:</span>
+            <span className={styles.value}>{name}</span>
+          </div>
+          <div className={styles.row}>
+            <span className={styles.label}>학번:</span>
+            <span className={styles.value}>{studentId}</span>
+          </div>
+          <div className={styles.row}>
+            <span className={styles.label}>전공:</span>
+            <span className={styles.value}>{major}</span>
+          </div>
+          <div className={styles.row}>
+            <span className={styles.label}>Email:</span>
+            <span className={styles.value}>{email}</span>
+          </div>
+          <div className={styles.row}>
+            <span className={styles.label}>인스타 아이디:</span>
+            <span className={styles.value}>{instaId}</span>
+          </div>
+          <div className={styles.row}>
+            <span className={styles.label}>카카오톡 아이디:</span>
+            <span className={styles.value}>{kakaoId}</span>
+          </div>
+          <div className={styles.row}>
+            <span className={styles.label}>MBTI:</span>
+            <span className={styles.value}>{mbti}</span>
+          </div>
+          <div className={styles.row}>
+            <span className={styles.label}>한줄소개:</span>
+            <span className={styles.value}>{bio}</span>
+          </div>
           <div className={styles.modalButtons}>
             <Button text="취소" onClick={() => setIsModalOpen(false)} />
             <Button text="확인" onClick={handleConfirmSubmit} />

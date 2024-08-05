@@ -8,6 +8,8 @@ import {
   FaAddressCard,
 } from "react-icons/fa";
 import { RiKakaoTalkFill } from "react-icons/ri";
+import AlertMessage from "../components/AlertMessage";
+
 interface ProfileProps {
   studentId: string;
   name: string;
@@ -16,7 +18,6 @@ interface ProfileProps {
   mbti: string;
   bio: string | undefined;
 }
-Modal.setAppElement("#root");
 
 const Profile: React.FC<ProfileProps> = ({
   name,
@@ -38,17 +39,8 @@ const Profile: React.FC<ProfileProps> = ({
   };
 
   const handleCopyClick = (text: string | undefined) => {
-    navigator.clipboard
-      .writeText(text ?? "")
-      .then(() => {
-        setAlertMessage("클립보드에 복사되었습니다.");
-        setTimeout(() => {
-          setAlertMessage("");
-        }, 2000);
-      })
-      .catch((err) => {
-        console.error("클립보드 복사에 실패했습니다:", err);
-      });
+    navigator.clipboard.writeText(text ?? "");
+    setAlertMessage("클립보드에 복사되었습니다.");
   };
 
   const year = studentId.slice(2, 4);
@@ -113,6 +105,13 @@ const Profile: React.FC<ProfileProps> = ({
         <div className={`${styles.alertMessage} ${styles.show}`}>
           {alertMessage}
         </div>
+      )}
+      {alertMessage && (
+        <AlertMessage
+          message={alertMessage}
+          type="success"
+          onClose={() => setAlertMessage("")}
+        />
       )}
     </>
   );

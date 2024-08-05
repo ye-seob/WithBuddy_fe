@@ -63,9 +63,11 @@ const Login = () => {
         onChange={(e) => setPin(e.target.value)}
         onKeyPress={handleKeyPress}
       />
-      <Button text="로그인" onClick={handleLogin} />
-      <Link to="/findPin">
-        <p className={styles.login_container}>Pin번호가 기억나지 않으신가요?</p>
+      <div className={styles.loginBtn}>
+        <Button text="로그인" onClick={handleLogin} />
+      </div>
+      <Link to="/findPin" className={styles.findMessage}>
+        <div>Pin번호가 기억나지 않으신가요?</div>
       </Link>
       {alertErrorMessage && (
         <AlertMessage
