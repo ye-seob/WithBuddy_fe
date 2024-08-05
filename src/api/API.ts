@@ -50,14 +50,20 @@ const getCookie = (name: string): string | undefined => {
   if (parts.length === 2) return parts.pop()?.split(";").shift();
   return undefined;
 };
+
 const refreshToken = async () => {
   try {
-    await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/refreshToken`, {
-      withCredentials: true,
-    });
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_BASE_URL}/auth/refreshToken`,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
+    return response.data;
   } catch (error) {
     console.error("토큰 재발급 실패", error);
-    throw error;
+    throw new Error("토큰 재발급에 실패했습니다.");
   }
 };
 
