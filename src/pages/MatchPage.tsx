@@ -43,6 +43,14 @@ const MatchPage: React.FC = () => {
       </div>
 
       <div className={styles.profiles_section}>
+        <Profile
+          studentId=""
+          name="가이드"
+          instaId="운영자"
+          kakaoId="운영자"
+          mbti="운영자"
+          bio="가이드입니다"
+        />
         {buddyData ? (
           buddyData.map((buddy, index) => (
             <div key={index} className={styles.profile}>
