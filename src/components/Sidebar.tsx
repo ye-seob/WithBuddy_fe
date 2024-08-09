@@ -1,8 +1,21 @@
 import { CiHome, CiEdit, CiBoxList, CiLogin, CiSettings } from "react-icons/ci";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "../public/css/Sidebar.module.css";
-
+import { logout } from "../api/user";
 const Sidebar: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      const response = await logout();
+      if (response === 200) {
+        localStorage.clear();
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("로그아웃 실패:", error);
+    }
+  };
   return (
     <div className={styles.sidebar}>
       <Link to="/match">
@@ -25,7 +38,7 @@ const Sidebar: React.FC = () => {
           <CiSettings />
         </div>
       </Link>
-      <div className={styles.logoutIcon}>
+      <div className={styles.logoutIcon} onClick={handleLogout}>
         <CiLogin />
       </div>
     </div>
