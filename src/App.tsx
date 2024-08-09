@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import MatchPage from "./pages/MatchPage";
 import EditPage from "./pages/EditPage";
@@ -24,6 +29,7 @@ const App = () => {
                 <Route path="/ranking" element={<RankingPage />} />
                 <Route path="/setting" element={<SettingPage />} />
                 <Route path="/findPin" element={<FindPinPage />} />
+                <Route path="*" element={<Navigate to="/login" replace />} />
               </Routes>
             </Layout>
           }
