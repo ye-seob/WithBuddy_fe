@@ -42,6 +42,6 @@
 @media (max-width: 480px) {
   .main_content {
     box-shadow: none;
-    zoom: 0.9;
+    zoom: 0.85;
   }
 }
