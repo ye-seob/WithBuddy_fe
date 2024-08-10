@@ -101,11 +101,7 @@ const Profile: React.FC<ProfileProps> = ({
           <span className={styles.snsIdText}>한줄소개: {bio}</span>
         </div>
       </Modal>
-      {alertMessage && (
-        <div className={`${styles.alertMessage} ${styles.show}`}>
-          {alertMessage}
-        </div>
-      )}
+
       {alertMessage && (
         <AlertMessage
           message={alertMessage}

@@ -37,13 +37,18 @@
 .input_with_button {
   display: flex;
   align-items: center;
-  width: 120%;
-  margin-bottom: 10px;
+  gap: 8px;
+}
+
+.input_with_button input[type="text"] {
+  flex: 1;
+  max-width: 260px;
 }
 
 .input_with_button button {
-  margin-left: 10px;
+  max-width: 70px;
 }
+
 .select_container {
   width: 345px;
 }

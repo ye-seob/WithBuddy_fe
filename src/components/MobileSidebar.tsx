@@ -33,7 +33,7 @@ const MobileSidebar: React.FC = () => {
 
   return (
     <>
-      {!isSidebarOpen && ( // 사이드바가 열렸을 때 햄버거 아이콘을 숨김
+      {!isSidebarOpen && ( 
         <div
           className={styles.hamburger}
           onClick={toggleSidebar}
@@ -44,7 +44,7 @@ const MobileSidebar: React.FC = () => {
       )}
 
       {isSidebarOpen && (
-        <div className={styles.overlay} onClick={closeSidebar}></div> // 사이드바 외부 클릭 시 닫힘
+        <div className={styles.overlay} onClick={closeSidebar}></div>
       )}
 
       <div
