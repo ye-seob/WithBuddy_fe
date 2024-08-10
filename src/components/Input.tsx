@@ -15,7 +15,6 @@ const Input: React.FC<InputProps> = ({
   value,
   readOnly = false,
   onChange,
-  onKeyPress,
 }) => {
   return (
     <input
@@ -24,7 +23,6 @@ const Input: React.FC<InputProps> = ({
       value={value}
       readOnly={readOnly}
       onChange={onChange}
-      onKeyPress={onKeyPress}
       className={styles.input}
     />
   );
