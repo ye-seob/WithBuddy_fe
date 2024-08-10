@@ -1,28 +1,39 @@
-.alertMessage,
+.alertMessage {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #98a679;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  z-index: 20000;
+}
+
+.alertMessage.show {
+  opacity: 1;
+  animation: slideDown 0.5s ease-in-out forwards;
+}
+
 .alertErrorMessage {
   position: fixed;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
+  background-color: #d62121;
   color: white;
   padding: 10px 20px;
   border-radius: 5px;
   opacity: 0;
-  z-index: 4000;
+  transition: opacity 1s ease-in-out;
+  z-index: 20000;
 }
 
-.alertMessage.show,
 .alertErrorMessage.show {
   opacity: 1;
   animation: slideDown 0.5s ease-in-out forwards;
-}
-
-.alertMessage {
-  background-color: #98a679;
-}
-
-.alertErrorMessage {
-  background-color: #d62121;
 }
 
 @keyframes slideDown {
