@@ -1,7 +1,7 @@
 .alertMessage,
 .alertErrorMessage {
   position: fixed;
-  top: -50px; /* 애니메이션 시작 위치를 상단 밖으로 설정 */
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
   color: white;
@@ -9,8 +9,6 @@
   border-radius: 5px;
   opacity: 0;
   z-index: 2000;
-  width: auto;
-  text-align: center;
 }
 
 .alertMessage.show,
@@ -29,30 +27,9 @@
 
 @keyframes slideDown {
   0% {
-    top: -50px; /* 애니메이션 시작 위치 */
+    top: 0;
   }
   100% {
-    top: 70px; /* 애니메이션 끝 위치 */
-  }
-}
-
-/* 모바일 대응 */
-@media (max-width: 768px) {
-  .alertMessage,
-  .alertErrorMessage {
-    top: 0;
-    left: 0;
-    transform: none;
-    width: 100%;
-    text-align: center;
-  }
-
-  @keyframes slideDown {
-    0% {
-      top: -50px;
-    }
-    100% {
-      top: 0; /* 모바일에서는 최상단에 고정 */
-    }
+    top: 70px;
   }
 }
