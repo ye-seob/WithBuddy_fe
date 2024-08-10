@@ -54,6 +54,31 @@
   animation: fadeIn 0.3s ease;
   text-align: center;
 }
+@media (max-width: 480px) {
+  .profileCard {
+    width: 110px;
+    height: 70px;
+  }
+  .profileName {
+    font-size: 1rem;
+  }
+  .modalContent {
+    width: 20rem;
+    padding: 24px;
+  }
+  .modalHeader {
+    font-size: 18px;
+  }
+  .modalItem {
+    padding: 10px;
+  }
+  .snsIdText {
+    font-size: 0.875rem;
+  }
+  .closeButton {
+    font-size: 1.25rem;
+  }
+}
 
 @keyframes fadeIn {
   from {
