@@ -9,6 +9,8 @@ import {
 } from "react-icons/fa";
 import { RiKakaoTalkFill } from "react-icons/ri";
 import AlertMessage from "../components/AlertMessage";
+import toastr from "toastr";
+import "toastr/build/toastr.min.css";
 
 interface ProfileProps {
   studentId: string;
@@ -33,14 +35,23 @@ const Profile: React.FC<ProfileProps> = ({
   const handleProfileClick = () => {
     setIsModalOpen(true);
   };
-
+  toastr.options = {
+    positionClass: "toast-top-center",
+    showEasing: "swing",
+    hideEasing: "linear",
+    showMethod: "slideDown",
+    hideMethod: "fadeOut",
+  };
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
 
+  const showSuccess = () => {
+    toastr.success("클립보드에 복사되었습니다.");
+  };
   const handleCopyClick = (text: string | undefined) => {
     navigator.clipboard.writeText(text ?? "");
-    setAlertMessage("클립보드에 복사되었습니다.");
+    showSuccess();
   };
 
   const year = studentId.slice(2, 4);

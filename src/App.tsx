@@ -12,6 +12,7 @@ import SettingPage from "./pages/SettingPage";
 import Layout from "./components/Layout";
 import FindPinPage from "./pages/FindPinPage";
 import WelcomePage from "./pages/WelcomePage";
+import "toastr/build/toastr.min.css";
 
 const App = () => {
   return (
