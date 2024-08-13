@@ -9,7 +9,9 @@ import { mbtiList } from "../util/mbti";
 import { majors } from "../util/major.ts";
 import AlertMessage from "../components/AlertMessage";
 import { useNavigate } from "react-router-dom";
-
+const openInNewTab = (url: string) => {
+  window.open(url, "_blank", "noopener,noreferrer");
+};
 Modal.setAppElement("#root");
 
 const Signup = () => {
@@ -26,7 +28,7 @@ const Signup = () => {
   const [mbti, setMbti] = useState("");
   const [bio, setBio] = useState("");
   const [checkedAuthCode, setCheckedAuthCode] = useState(false);
-
+  const [isAgreed, setIsAgreed] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [alertMessage, setAlertMessage] = useState("");
@@ -61,6 +63,10 @@ const Signup = () => {
       setAlertErrorMessage(
         "인스타그램 또는 카카오톡 아이디를 하나 이상 입력해주세요."
       );
+      return false;
+    }
+    if (!isAgreed) {
+      setAlertErrorMessage("이용약관 및 개인정보처리방침에 동의해야 합니다.");
       return false;
     }
     return true;
@@ -230,6 +236,43 @@ const Signup = () => {
         value={bio}
         onChange={(e) => setBio(e.target.value)}
       />
+      <div
+        style={{
+          padding: " 0px 30px",
+          marginTop: "20px",
+          marginBottom: "20px",
+        }}
+      >
+        <input
+          type="checkbox"
+          id="terms"
+          checked={isAgreed}
+          onChange={() => setIsAgreed(!isAgreed)}
+        />
+        <label htmlFor="terms">
+          <span
+            onClick={() => openInNewTab("/termsAndConditions")}
+            style={{
+              cursor: "pointer",
+              textDecoration: "underline",
+              marginLeft: "10px",
+            }}
+          >
+            이용약관
+          </span>
+          <span> 및 </span>
+          <span
+            onClick={() => openInNewTab("/privacyPolicy")}
+            style={{
+              cursor: "pointer",
+              textDecoration: "underline",
+            }}
+          >
+            개인정보처리방침
+          </span>
+          <span>에 &nbsp;&nbsp;&nbsp;&nbsp;동의합니다.</span>
+        </label>
+      </div>
 
       <Button text="가입" onClick={handleSubmit} />
       <Modal

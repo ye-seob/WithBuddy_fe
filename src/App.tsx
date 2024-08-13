@@ -12,13 +12,16 @@ import SettingPage from "./pages/SettingPage";
 import Layout from "./components/Layout";
 import FindPinPage from "./pages/FindPinPage";
 import WelcomePage from "./pages/WelcomePage";
-import "toastr/build/toastr.min.css";
+import PrivacyPolicy from "./util/PrivacyPolicy";
+import TermsAndConditions from "./util/TermsAndConditions";
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<WelcomePage />} />
+        <Route path="/" element={<WelcomePage />} />{" "}
+        <Route path="/termsAndConditions" element={<TermsAndConditions />} />
+        <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
         <Route
           path="*"
           element={
@@ -30,6 +33,7 @@ const App = () => {
                 <Route path="/ranking" element={<RankingPage />} />
                 <Route path="/setting" element={<SettingPage />} />
                 <Route path="/findPin" element={<FindPinPage />} />
+
                 <Route path="*" element={<Navigate to="/login" replace />} />
               </Routes>
             </Layout>
