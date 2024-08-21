@@ -49,8 +49,17 @@ const MatchPage: React.FC = () => {
           instaId="운영자"
           kakaoId="운영자"
           mbti="운영자"
-          bio="가이드입니다"
+          bio={
+            <>
+              <a href="/guide" target="_blank" rel="noopener noreferrer">
+                <span style={{ color: "#61792b" }}>
+                  WithBuddy 가이드 보러가기
+                </span>
+              </a>
+            </>
+          }
         />
+
         {buddyData ? (
           buddyData.map((buddy, index) => (
             <div key={index} className={styles.profile}>

@@ -17,7 +17,7 @@ interface ProfileProps {
   instaId: string | undefined;
   kakaoId: string | undefined;
   mbti: string;
-  bio: string | undefined;
+  bio: string | JSX.Element | undefined;
 }
 
 const Profile: React.FC<ProfileProps> = ({

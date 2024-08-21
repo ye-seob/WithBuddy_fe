@@ -1,0 +1,44 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  color: #333;
+  background-color: #fff;
+}
+
+.header {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.signupSection,
+.loginSection,
+.profileSection,
+.otherPages {
+  margin-bottom: 2rem;
+}
+
+.signupStep {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.signupStep img {
+  width: 400px;
+  margin-right: 1rem;
+}
+
+.loginSection img,
+.profileSection img,
+.otherPages img {
+  max-width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.otherPages {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+}

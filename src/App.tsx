@@ -14,6 +14,7 @@ import FindPinPage from "./pages/FindPinPage";
 import WelcomePage from "./pages/WelcomePage";
 import PrivacyPolicy from "./util/PrivacyPolicy";
 import TermsAndConditions from "./util/TermsAndConditions";
+import GuidePage from "./pages/GuidePage";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/" element={<WelcomePage />} />{" "}
         <Route path="/termsAndConditions" element={<TermsAndConditions />} />
         <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
+        <Route path="/guide" element={<GuidePage />} />
         <Route
           path="*"
           element={
