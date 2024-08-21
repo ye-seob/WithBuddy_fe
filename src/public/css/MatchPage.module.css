@@ -18,9 +18,11 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
-  height: 330px;
+  height: 4000px;
   padding: 40px;
   justify-content: space-between;
+  overflow-y: auto; /* 세로 스크롤 가능 */
+  overflow-x: hidden; /* 가로 스크롤 방지 */
 }
 
 .profile {
