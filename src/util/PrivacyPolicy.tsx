@@ -1,7 +1,8 @@
+import styles from "./PrivacyPolicy.module.css";
+
 const PrivacyPolicy = () => {
   return (
-    <div>
-      <h1>이용약관</h1>
+    <div className={styles.container}>
       <div>
         <h2>제 1 장 총 칙</h2>
 

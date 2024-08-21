@@ -130,11 +130,11 @@ const Signup = () => {
 
   const handleSendMail = async () => {
     try {
-      setAlertMessage("전송되었습니다.");
       const result = await sendMail(email);
       if (result != 200) {
         setAlertErrorMessage("메일 전송에 실패하였습니다.");
       }
+      setAlertMessage("전송되었습니다.");
     } catch (error) {
       setAlertErrorMessage("메일 전송에 실패하였습니다.");
     }

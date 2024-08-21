@@ -8,9 +8,8 @@ import {
   FaAddressCard,
 } from "react-icons/fa";
 import { RiKakaoTalkFill } from "react-icons/ri";
-import AlertMessage from "../components/AlertMessage";
-import toastr from "toastr";
 import "toastr/build/toastr.min.css";
+import AlertMessage from "../components/AlertMessage";
 
 interface ProfileProps {
   studentId: string;
@@ -31,35 +30,31 @@ const Profile: React.FC<ProfileProps> = ({
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
-
   const handleProfileClick = () => {
     setIsModalOpen(true);
   };
-  toastr.options = {
-    positionClass: "toast-top-center",
-    showEasing: "swing",
-    hideEasing: "linear",
-    showMethod: "slideDown",
-    hideMethod: "fadeOut",
-  };
+
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
 
   const showSuccess = () => {
-    toastr.success("클립보드에 복사되었습니다.");
+    setAlertMessage("클립보드에 복사되었습니다.");
   };
+
   const handleCopyClick = (text: string | undefined) => {
     navigator.clipboard.writeText(text ?? "");
     showSuccess();
   };
 
-  const year = studentId.slice(2, 4);
-
+  let year = studentId.slice(2, 4) + "학번";
+  if (year === "학번") {
+    year = "With Buddy";
+  }
   return (
     <>
       <div className={styles.profileCard} onClick={handleProfileClick}>
-        <h2 className={styles.profileNum}>{year}학번</h2>
+        <h2 className={styles.profileNum}>{year}</h2>
         <h3 className={styles.profileName}>{name}</h3>
       </div>
       <Modal
@@ -73,7 +68,7 @@ const Profile: React.FC<ProfileProps> = ({
           X
         </button>
         <div className={styles.modalHeader}>
-          {year}학번 {name}
+          {year} {name}
         </div>
         <div className={styles.modalBody}>
           <div className={styles.modalItem}>
@@ -112,7 +107,6 @@ const Profile: React.FC<ProfileProps> = ({
           <span className={styles.snsIdText}>한줄소개: {bio}</span>
         </div>
       </Modal>
-
       {alertMessage && (
         <AlertMessage
           message={alertMessage}

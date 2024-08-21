@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import Swal from "sweetalert2";
 import styles from "../public/css/AlertMessage.module.css";
 
 interface AlertMessageProps {
@@ -13,17 +14,20 @@ const AlertMessage: React.FC<AlertMessageProps> = ({
   onClose,
 }) => {
   useEffect(() => {
-    const timer = setTimeout(() => {
-      onClose();
-    }, 2000);
+    Swal.fire({
+      toast: true,
+      position: "top",
+      title: message,
+      showConfirmButton: false,
+      timer: 2000,
+      customClass: {
+        popup: type === "success" ? styles.successToast : styles.errorToast,
+      },
+      willClose: onClose,
+    }); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    return () => clearTimeout(timer);
-  }, [onClose]);
-
-  const alertClass =
-    type === "success" ? styles.alertMessage : styles.alertErrorMessage;
-
-  return <div className={`${alertClass} ${styles.show}`}>{message}</div>;
+  return null;
 };
 
 export default AlertMessage;

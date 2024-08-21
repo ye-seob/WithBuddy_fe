@@ -1,6 +1,8 @@
+import styles from "./PrivacyPolicy.module.css";
+
 const TermsAndConditions = () => {
   return (
-    <div>
+    <div className={styles.container}>
       <h1>개인정보 처리방침</h1>
       <p>
         본 서비스는 다음과 같은 개인정보를 수집하며, 수집된 정보는 다음의
