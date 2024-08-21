@@ -4,41 +4,42 @@
   padding: 2rem;
   color: #333;
   background-color: #fff;
+  text-align: center;
 }
 
 .header {
   font-size: 1.5rem;
-  font-weight: bold;
   margin-bottom: 2rem;
-}
-
-.signupSection,
-.loginSection,
-.profileSection,
-.otherPages {
-  margin-bottom: 2rem;
+  text-align: center;
 }
 
 .signupStep {
   display: flex;
+  flex-direction: column;
   align-items: center;
+  margin-bottom: 2rem;
+}
+
+.image {
+  width: 100%;
+  max-width: 300px;
   margin-bottom: 1rem;
 }
 
-.signupStep img {
-  width: 400px;
-  margin-right: 1rem;
+.description {
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
-.loginSection img,
-.profileSection img,
-.otherPages img {
-  max-width: 100%;
-  margin-bottom: 0.5rem;
+@media (min-width: 768px) {
+  .image {
+    max-width: 500px;
+  }
 }
 
-.otherPages {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 1rem;
+@media (min-width: 1024px) {
+  .image {
+    max-width: 700px;
+  }
 }
