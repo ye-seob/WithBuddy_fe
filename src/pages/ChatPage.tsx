@@ -4,7 +4,7 @@ import styles from "../public/css/ChatPage.module.css";
 import { useUserStore } from "../stores/userStore";
 import { useChatStore } from "../stores/useChatStore";
 
-const socket: Socket = io("http://localhost:3000");
+const socket: Socket = io("https://www.skuwithbuddy.com");
 
 export interface ChatMessage {
   _id: string;
