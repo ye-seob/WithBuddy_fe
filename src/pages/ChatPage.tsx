@@ -4,7 +4,7 @@ import styles from "../public/css/ChatPage.module.css";
 import { useUserStore } from "../stores/userStore";
 import { useChatStore } from "../stores/useChatStore";
 
-const socket: Socket = io("https://www.skuwithbuddy.com");
+let socket: Socket;
 
 export interface ChatMessage {
   _id: string;
@@ -25,25 +25,40 @@ const ChatPage: React.FC = () => {
   };
 
   useEffect(() => {
-    socket.emit("register", { studentId, major });
+    if (studentId && major) {
+      socket = io("https://www.skuwithbuddy.com", {
+        path: "/socket.io",
+        transports: ["websocket"],
+        secure: true,
+      });
 
-    socket.on("previousMessages", (loadedMessages: ChatMessage[]) => {
-      setMessages(loadedMessages);
-    });
+      socket.emit("register", { studentId, major });
 
-    socket.on("chat message", (newMessage: ChatMessage) => {
-      addMessage(newMessage);
-    });
+      socket.on("previousMessages", (loadedMessages: ChatMessage[]) => {
+        setMessages(loadedMessages);
+      });
 
-    socket.on("error", (errorMessage: string) => {
-      console.error("Server error:", errorMessage);
-      // 오류 처리
-    });
+      socket.on("chat message", (newMessage: ChatMessage) => {
+        addMessage(newMessage);
+      });
+
+      socket.on("error", (errorMessage: string) => {
+        console.error("Server error:", errorMessage);
+      });
+
+      socket.on("connect_error", (error) => {
+        console.error("Connection error:", error);
+      });
+    }
 
     return () => {
-      socket.off("previousMessages");
-      socket.off("chat message");
-      socket.off("error");
+      if (socket) {
+        socket.off("previousMessages");
+        socket.off("chat message");
+        socket.off("error");
+        socket.off("connect_error");
+        socket.disconnect();
+      }
     };
   }, [studentId, major, setMessages, addMessage]);
 
@@ -53,7 +68,7 @@ const ChatPage: React.FC = () => {
 
   const sendMessage = (e: React.FormEvent) => {
     e.preventDefault();
-    if (message.trim()) {
+    if (message.trim() && socket) {
       socket.emit("chat message", message);
       setMessage("");
     }
