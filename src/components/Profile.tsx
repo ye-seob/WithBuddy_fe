@@ -74,7 +74,7 @@ const Profile: React.FC<ProfileProps> = ({
           <div className={styles.modalItem}>
             <FaInstagram size={20} color="#E1306C" />
             <span className={styles.snsIdText}>
-              인스타 아이디 : {instaId || "없음"}
+              인스타 아이디 : "제공되지 않습니다."
             </span>
 
             <div
@@ -87,7 +87,7 @@ const Profile: React.FC<ProfileProps> = ({
           <div className={styles.modalItem}>
             <RiKakaoTalkFill size={20} color="#FFD700" />
             <span className={styles.snsIdText}>
-              카톡 아이디 : {kakaoId || "없음"}
+              카톡 아이디 : "제공되지 않습니다."
             </span>
 
             <div
