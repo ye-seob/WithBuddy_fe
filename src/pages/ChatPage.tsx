@@ -27,7 +27,6 @@ const ChatPage: React.FC = () => {
   useEffect(() => {
     if (studentId && major) {
       socket = io("https://www.skuwithbuddy.com", {
-        path: "/socket.io",
         transports: ["websocket"],
         secure: true,
       });
