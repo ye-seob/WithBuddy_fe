@@ -21,7 +21,6 @@ const ChatPage: React.FC = () => {
   useEffect(() => {
     const newSocket = io("https://skuwithbuddy.com", {
       secure: true,
-      transports: ["websocket", "polling"],
     });
     setSocket(newSocket);
 
