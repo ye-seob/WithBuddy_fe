@@ -1,4 +1,11 @@
-import { CiHome, CiEdit, CiBoxList, CiLogin, CiSettings } from "react-icons/ci";
+import {
+  CiHome,
+  CiEdit,
+  CiBoxList,
+  CiLogin,
+  CiSettings,
+  CiChat2,
+} from "react-icons/ci";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "../public/css/Sidebar.module.css";
 import { logout } from "../api/user";
@@ -26,6 +33,11 @@ const Sidebar: React.FC = () => {
       <Link to="/ranking">
         <div className={styles.icon}>
           <CiBoxList />
+        </div>
+      </Link>
+      <Link to="/chat">
+        <div className={styles.icon}>
+          <CiChat2 />
         </div>
       </Link>
       <Link to="/edit">

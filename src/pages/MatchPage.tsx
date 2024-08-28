@@ -19,7 +19,7 @@ const MatchPage: React.FC = () => {
   const { major, studentId } = useUserStore();
   const [buddyData, setBuddyData] = useState<BuddyData[] | null>(null);
 
-  const lastTwo = studentId.slice(-2);
+  const lastThree = studentId.slice(-3);
 
   useEffect(() => {
     const fetchBuddyData = async () => {
@@ -37,8 +37,8 @@ const MatchPage: React.FC = () => {
   return (
     <>
       <div className={styles.header_section}>
-        <span className={styles.commonNumber}>
-          {major} {lastTwo}번
+        <span className={styles.title}>
+          {major} {lastThree}번
         </span>
       </div>
 
