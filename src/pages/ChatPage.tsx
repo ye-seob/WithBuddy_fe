@@ -19,9 +19,7 @@ const ChatPage: React.FC = () => {
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const newSocket = io("https://skuwithbuddy.com", {
-      secure: true,
-    });
+    const newSocket = io("https://skuwithbuddy.com");
     setSocket(newSocket);
 
     newSocket.on("connect", () => {
