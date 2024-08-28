@@ -3,8 +3,7 @@ import io, { Socket } from "socket.io-client";
 import styles from "../public/css/ChatPage.module.css";
 import { useUserStore } from "../stores/userStore";
 import { useChatStore } from "../stores/useChatStore";
-
-let socket: Socket;
+const socket: Socket = io("wss://www.skuwithbuddy.com");
 
 export interface ChatMessage {
   _id: string;
@@ -25,39 +24,25 @@ const ChatPage: React.FC = () => {
   };
 
   useEffect(() => {
-    if (studentId && major) {
-      socket = io("https://www.skuwithbuddy.com", {
-        transports: ["websocket"],
-        secure: true,
-      });
+    socket.emit("register", { studentId, major });
 
-      socket.emit("register", { studentId, major });
+    socket.on("previousMessages", (loadedMessages: ChatMessage[]) => {
+      setMessages(loadedMessages);
+    });
 
-      socket.on("previousMessages", (loadedMessages: ChatMessage[]) => {
-        setMessages(loadedMessages);
-      });
+    socket.on("chat message", (newMessage: ChatMessage) => {
+      addMessage(newMessage);
+    });
 
-      socket.on("chat message", (newMessage: ChatMessage) => {
-        addMessage(newMessage);
-      });
-
-      socket.on("error", (errorMessage: string) => {
-        console.error("Server error:", errorMessage);
-      });
-
-      socket.on("connect_error", (error) => {
-        console.error("Connection error:", error);
-      });
-    }
+    socket.on("error", (errorMessage: string) => {
+      console.error("Server error:", errorMessage);
+      // 오류 처리
+    });
 
     return () => {
-      if (socket) {
-        socket.off("previousMessages");
-        socket.off("chat message");
-        socket.off("error");
-        socket.off("connect_error");
-        socket.disconnect();
-      }
+      socket.off("previousMessages");
+      socket.off("chat message");
+      socket.off("error");
     };
   }, [studentId, major, setMessages, addMessage]);
 
@@ -67,7 +52,7 @@ const ChatPage: React.FC = () => {
 
   const sendMessage = (e: React.FormEvent) => {
     e.preventDefault();
-    if (message.trim() && socket) {
+    if (message.trim()) {
       socket.emit("chat message", message);
       setMessage("");
     }
