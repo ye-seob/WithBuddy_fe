@@ -1,61 +1,68 @@
-import React, { useState, useEffect, useRef } from "react";
-import io, { Socket } from "socket.io-client";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "../public/css/ChatPage.module.css";
 import { useUserStore } from "../stores/userStore";
-import { useChatStore } from "../stores/useChatStore";
-const socket: Socket = io("wss://www.skuwithbuddy.com");
+import { io, Socket } from "socket.io-client";
+import Button from "../components/Button";
+import Input from "../components/Input";
 
-export interface ChatMessage {
-  _id: string;
+interface ChatMessage {
   studentId: string;
   message: string;
   timestamp: string;
-  group: string;
 }
 
 const ChatPage: React.FC = () => {
   const { studentId, major } = useUserStore();
   const [message, setMessage] = useState<string>("");
-  const { messages, setMessages, addMessage } = useChatStore();
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [socket, setSocket] = useState<Socket | null>(null);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    socket.emit("register", { studentId, major });
+    const newSocket = io("http://localhost:3000");
+    setSocket(newSocket);
 
-    socket.on("previousMessages", (loadedMessages: ChatMessage[]) => {
-      setMessages(loadedMessages);
+    newSocket.on("connect", () => {
+      console.log("소켓 연결:", newSocket.id);
+
+      // 방에 참가하고 이전 메시지 요청
+      newSocket.emit("join room", { major, studentId });
     });
 
-    socket.on("chat message", (newMessage: ChatMessage) => {
-      addMessage(newMessage);
+    // 이전 메시지 수신
+    newSocket.on("previous messages", (msgs: ChatMessage[]) => {
+      setMessages(msgs);
     });
 
-    socket.on("error", (errorMessage: string) => {
-      console.error("Server error:", errorMessage);
-      // 오류 처리
+    // 새로운 메시지 수신
+    newSocket.on("chat message", (msg: ChatMessage) => {
+      setMessages((prevMessages) => [...prevMessages, msg]);
     });
 
     return () => {
-      socket.off("previousMessages");
-      socket.off("chat message");
-      socket.off("error");
+      newSocket.disconnect();
+      console.log("소켓 연결 중단");
     };
-  }, [studentId, major, setMessages, addMessage]);
+  }, [studentId, major]);
 
   useEffect(() => {
-    scrollToBottom();
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
   }, [messages]);
 
-  const sendMessage = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (message.trim()) {
-      socket.emit("chat message", message);
-      setMessage("");
+  const sendMessage = () => {
+    if (socket) {
+      socket.emit("chat message", { studentId, major, message }, () => {
+        setMessage("");
+      });
     }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    sendMessage();
+    setMessage("");
   };
 
   return (
@@ -65,11 +72,14 @@ const ChatPage: React.FC = () => {
           {major} {studentId.slice(-3)}번
         </span>
       </div>
+
       <div className={styles.messages_section}>
-        {messages.map((msg) => (
-          <div key={msg._id} className={styles.message}>
-            <strong>{msg.studentId}: </strong>
-            <span>{msg.message}</span>
+        {messages.map((msg, index) => (
+          <div key={index} className={styles.message}>
+            <div>
+              <strong>{msg.studentId}</strong>
+            </div>
+            <div>{msg.message}</div>
             <div className={styles.timestamp}>
               {new Date(msg.timestamp).toLocaleTimeString()}
             </div>
@@ -77,16 +87,15 @@ const ChatPage: React.FC = () => {
         ))}
         <div ref={messagesEndRef} />
       </div>
-      <form onSubmit={sendMessage} className={styles.input_section}>
-        <input
-          className={styles.input}
+
+      <form onSubmit={handleSubmit} className={styles.input_section}>
+        <Input
+          placeholder="메세지를 입력해주세요"
+          type="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="메시지를 입력하세요..."
         />
-        <button type="submit" className={styles.send_button}>
-          전송
-        </button>
+        <Button onClick={() => {}} text="전송" className={styles.send_button} />
       </form>
     </div>
   );
