@@ -4,7 +4,7 @@ import styles from "../public/css/Profile.module.css";
 import {
   FaInstagram,
   FaUser,
-  FaClipboard,
+  // FaClipboard,
   FaAddressCard,
 } from "react-icons/fa";
 import { RiKakaoTalkFill } from "react-icons/ri";
@@ -23,8 +23,8 @@ interface ProfileProps {
 const Profile: React.FC<ProfileProps> = ({
   name,
   studentId,
-  instaId,
-  kakaoId,
+  // instaId,
+  // kakaoId,
   mbti,
   bio,
 }) => {
@@ -38,14 +38,14 @@ const Profile: React.FC<ProfileProps> = ({
     setIsModalOpen(false);
   };
 
-  const showSuccess = () => {
-    setAlertMessage("클립보드에 복사되었습니다.");
-  };
+  // const showSuccess = () => {
+  //   setAlertMessage("클립보드에 복사되었습니다.");
+  // };
 
-  const handleCopyClick = (text: string | undefined) => {
-    navigator.clipboard.writeText(text ?? "");
-    showSuccess();
-  };
+  // const handleCopyClick = (text: string | undefined) => {
+  //   navigator.clipboard.writeText(text ?? "");
+  //   showSuccess();
+  // };
 
   let year = studentId.slice(2, 4) + "학번";
   if (year === "학번") {
@@ -74,28 +74,28 @@ const Profile: React.FC<ProfileProps> = ({
           <div className={styles.modalItem}>
             <FaInstagram size={20} color="#E1306C" />
             <span className={styles.snsIdText}>
-              인스타 아이디 : "제공되지 않습니다."
+              인스타 아이디 : 제공되지 않습니다.
             </span>
 
-            <div
+            {/* <div
               className={styles.copyIcon}
               onClick={() => handleCopyClick(instaId)}
             >
               {instaId && <FaClipboard size={20} />}
-            </div>
+            </div> */}
           </div>
           <div className={styles.modalItem}>
             <RiKakaoTalkFill size={20} color="#FFD700" />
             <span className={styles.snsIdText}>
-              카톡 아이디 : "제공되지 않습니다."
+              카톡 아이디 : 제공되지 않습니다.
             </span>
 
-            <div
+            {/* <div
               className={styles.copyIcon}
               onClick={() => handleCopyClick(kakaoId)}
             >
               {kakaoId && <FaClipboard size={20} />}
-            </div>
+            </div> */}
           </div>
           <div className={styles.modalItem}>
             <FaUser size={20} color="#6f7d47" />
