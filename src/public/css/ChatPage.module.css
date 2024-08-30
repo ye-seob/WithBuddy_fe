@@ -78,31 +78,40 @@
 
 .input {
   flex: 1;
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  margin-right: 10px;
-  height: 50px;
+  padding: 0.5rem 1rem;
+  border: 1px solid #e0e0e0;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  margin: 0.75rem;
 }
 
 .send_button {
-  padding: 10px 20px;
   border: none;
-  border-radius: 10px;
   background-color: #c6d1ae;
-  color: white;
   cursor: pointer;
   width: 5rem;
   height: 45px;
   white-space: nowrap;
+
+  padding: 0.5rem 0;
+  color: white;
+  border-radius: 1rem;
 }
 @media (max-width: 600px) {
-  .input {
-    padding: 8px;
+  .input_section {
+    padding: 5px;
   }
-  .send_button {
-    width: 9rem;
+
+  .input {
+    padding: 0.4rem 0.8rem;
+    margin: 0.5rem;
     font-size: 0.9rem;
+
+    .send_button {
+      width: 4rem;
+      height: 40px;
+      font-size: 0.8rem;
+    }
   }
 }
 .send_button:hover {

@@ -2,8 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "../public/css/ChatPage.module.css";
 import { useUserStore } from "../stores/userStore";
 import { io, Socket } from "socket.io-client";
-import Button from "../components/Button";
-import Input from "../components/Input";
 
 interface ChatMessage {
   studentId: string;
@@ -24,8 +22,6 @@ const ChatPage: React.FC = () => {
     setSocket(newSocket);
 
     newSocket.on("connect", () => {
-      console.log("소켓 연결:", newSocket.id);
-
       // 방에 참가하고 이전 메시지 요청
       newSocket.emit("join room", { major, studentId });
     });
@@ -42,7 +38,6 @@ const ChatPage: React.FC = () => {
 
     return () => {
       newSocket.disconnect();
-      console.log("소켓 연결 중단");
     };
   }, [studentId, major]);
 
@@ -95,13 +90,16 @@ const ChatPage: React.FC = () => {
       </div>
 
       <form onSubmit={handleSubmit} className={styles.input_section}>
-        <Input
+        <input
           placeholder="메세지를 입력해주세요"
           type="text"
           value={message}
+          className={styles.input}
           onChange={(e) => setMessage(e.target.value)}
         />
-        <Button onClick={() => {}} text="전송" className={styles.send_button} />
+        <button className={styles.send_button} onClick={() => {}}>
+          전송
+        </button>
       </form>
     </div>
   );
