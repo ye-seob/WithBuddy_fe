@@ -92,11 +92,14 @@
   background-color: #c6d1ae;
   color: white;
   cursor: pointer;
-  width: 7rem;
+  width: 5rem;
   height: 45px;
   white-space: nowrap;
 }
 @media (max-width: 600px) {
+  .input {
+    padding: 8px;
+  }
   .send_button {
     width: 9rem;
     font-size: 0.9rem;
