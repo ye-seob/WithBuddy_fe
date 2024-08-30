@@ -20,6 +20,7 @@ const ChatPage: React.FC = () => {
 
   useEffect(() => {
     const newSocket = io("https://api.skuwithbuddy.com");
+    //const newSocket = io("http://localhost:3000");
     setSocket(newSocket);
 
     newSocket.on("connect", () => {
@@ -84,7 +85,6 @@ const ChatPage: React.FC = () => {
             <div>
               <strong>{msg.studentId.slice(2, 4)}학번 </strong>
             </div>
-
             <div> {msg.message}</div>
             <div className={styles.timestamp}>
               {new Date(msg.timestamp).toLocaleTimeString()}

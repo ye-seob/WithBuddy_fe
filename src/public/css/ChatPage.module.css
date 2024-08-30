@@ -26,34 +26,48 @@
   flex: 1;
   padding: 20px;
   overflow-y: auto;
+  overflow: auto;
+  scrollbar-width: none;
+}
+
+.messages_section::-webkit-scrollbar {
+  display: none;
 }
 
 .message {
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: #eaf2d8;
-  border-radius: 4px;
+  padding: 10px 15px;
+  margin-bottom: 30px;
+  border-radius: 18px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex; /* Flex를 사용하여 내용을 감쌉니다 */
-  align-items: center; /* 수직 정렬 */
-  width: fit-content; /* 텍스트의 길이에 맞게 크기 조정 */
-  word-break: break-word; /* 긴 단어를 줄바꿈 처리 */
+  max-width: 60%;
+  word-break: break-word;
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
+
 .message.right {
   background-color: #c6d1ae;
   align-self: flex-end;
-  text-align: right;
+  text-align: left;
+  border-bottom-right-radius: 0;
+  margin-left: auto;
 }
 
 .message.left {
   background-color: #eaf2d8;
   align-self: flex-start;
   text-align: left;
+  border-bottom-left-radius: 0;
+  margin-right: auto;
 }
+
 .timestamp {
-  font-size: 0.75em;
+  font-size: 0.75rem;
   color: #888;
-  margin-top: 5px;
+  position: absolute;
+  bottom: -20px;
+  right: 10px;
 }
 
 .input_section {
@@ -77,6 +91,7 @@
   background-color: #c6d1ae;
   color: white;
   cursor: pointer;
+  width: 5rem;
 }
 
 .send_button:hover {
