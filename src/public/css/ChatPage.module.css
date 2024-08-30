@@ -96,7 +96,12 @@
   height: 45px;
   white-space: nowrap;
 }
-
+@media (max-width: 600px) {
+  .send_button {
+    width: 9rem;
+    font-size: 0.9rem;
+  }
+}
 .send_button:hover {
   background-color: #aab689;
 }
