@@ -9,12 +9,15 @@ import { mbtiList } from "../util/mbti";
 import { majors } from "../util/major.ts";
 import AlertMessage from "../components/AlertMessage";
 import { useNavigate } from "react-router-dom";
+//새 창 여는 함수
 const openInNewTab = (url: string) => {
   window.open(url, "_blank", "noopener,noreferrer");
 };
+
 Modal.setAppElement("#root");
 
 const Signup = () => {
+  //상태 관리
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [studentId, setStudentId] = useState("");
@@ -23,8 +26,8 @@ const Signup = () => {
   const [pinConfirm, setPinConfirm] = useState("");
   const [email, setEmail] = useState("");
   const [authCode, setAuthCode] = useState("");
-  const [instaId, setInstaId] = useState("");
-  const [kakaoId, setKakaoId] = useState("");
+  const [instaId, setInstaId] = useState("제공되지 않는 서비스입니다");
+  const [kakaoId, setKakaoId] = useState("제공되지 않는 서비스입니다");
   const [mbti, setMbti] = useState("");
   const [bio, setBio] = useState("");
   const [checkedAuthCode, setCheckedAuthCode] = useState(false);
@@ -34,6 +37,7 @@ const Signup = () => {
   const [alertMessage, setAlertMessage] = useState("");
   const [alertErrorMessage, setAlertErrorMessage] = useState("");
 
+  //유효성 검사
   const validate = (): boolean => {
     if (!/^[0-9]{10}$/.test(studentId)) {
       setAlertErrorMessage("학번을 올바르게 입력해주세요.");
@@ -59,12 +63,12 @@ const Signup = () => {
       setAlertErrorMessage("인증번호 불일치");
       return false;
     }
-    if (!instaId && !kakaoId) {
-      setAlertErrorMessage(
-        "인스타그램 또는 카카오톡 아이디를 하나 이상 입력해주세요."
-      );
-      return false;
-    }
+    // if (!instaId && !kakaoId) {
+    //   setAlertErrorMessage(
+    //     "인스타그램 또는 카카오톡 아이디를 하나 이상 입력해주세요."
+    //   );
+    //   return false;
+    // }
     if (!isAgreed) {
       setAlertErrorMessage("이용약관 및 개인정보처리방침에 동의해야 합니다.");
       return false;
@@ -83,7 +87,7 @@ const Signup = () => {
       }
     } catch (error) {
       console.error(error);
-      setAlertErrorMessage("인증 중 오류 발생");
+      setAlertErrorMessage("오류가 발생하였습니다.");
     }
   };
 
@@ -170,13 +174,13 @@ const Signup = () => {
         </select>
       </div>
       <Input
-        type="text"
+        type="password"
         placeholder="Pin 번호 Ex) 1234"
         value={pin}
         onChange={(e) => setPin(e.target.value)}
       />
       <Input
-        type="text"
+        type="password"
         placeholder="Pin 번호 확인"
         value={pinConfirm}
         onChange={(e) => setPinConfirm(e.target.value)}
@@ -204,14 +208,16 @@ const Signup = () => {
       <label className={styles.label}>SNS 아이디</label>
       <Input
         type="text"
-        placeholder="인스타 아이디"
+        placeholder="제공되지 않는 서비스입니다"
         value={instaId}
+        readOnly={true}
         onChange={(e) => setInstaId(e.target.value)}
       />
       <Input
         type="text"
-        placeholder="카카오톡 아이디"
+        placeholder="제공되지 않는 서비스입니다"
         value={kakaoId}
+        readOnly={true}
         onChange={(e) => setKakaoId(e.target.value)}
       />
       <label className={styles.label}>MBTI</label>

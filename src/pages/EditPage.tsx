@@ -96,13 +96,13 @@ const EditPage: React.FC = () => {
           }}
         />
         <Input
-          type="text"
+          type="password"
           placeholder="새로운 PIN번호"
           value={newPin}
           onChange={(e) => setNewPin(e.target.value)}
         />
         <Input
-          type="text"
+          type="password"
           placeholder="새로운 PIN번호 확인"
           value={pinConfirm}
           onChange={(e) => setPinConfirm(e.target.value)}
@@ -110,14 +110,18 @@ const EditPage: React.FC = () => {
         <label className={styles.label}>SNS 아이디</label>
         <Input
           type="text"
-          placeholder="인스타 아이디"
-          value={tempInstaId}
+          placeholder="제공되지 않는 서비스입니다"
+          //value={tempInstaId}
+          value=""
+          readOnly={true}
           onChange={(e) => setTempInstaId(e.target.value)}
         />
         <Input
           type="text"
-          placeholder="카카오톡 아이디"
-          value={tempKakaoId}
+          placeholder="제공되지 않는 서비스입니다"
+          readOnly={true}
+          //value={tempKakaoId}
+          value=""
           onChange={(e) => setTempKakaoId(e.target.value)}
         />
         <label className={styles.label}>한줄 소개</label>

@@ -41,7 +41,7 @@ const RankingPage = () => {
                 <div className={styles.bar_container}>
                   <div
                     className={styles.bar}
-                    style={{ width: `${(major.number / 10) * 100}%` }}
+                    style={{ width: `${(major.number / 50) * 100}%` }}
                   ></div>
                   <span className={styles.number}>{major.number}</span>
                 </div>

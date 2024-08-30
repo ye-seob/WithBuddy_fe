@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaEnvelope, FaGithub, FaTrashAlt } from "react-icons/fa";
+import { FaEnvelope, FaInfoCircle, FaTrashAlt } from "react-icons/fa";
 import styles from "../public/css/SettingPage.module.css";
 import "../public/css/global.css";
 import axios from "axios";
@@ -26,10 +26,13 @@ const SettingPage = () => {
 
   const handleDeleteUser = async () => {
     try {
-      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/user/deleteUser`, {
-        data: { studentId },
-        withCredentials: true,
-      });
+      await axios.delete(
+        `${import.meta.env.VITE_API_BASE_URL}/user/deleteUser`,
+        {
+          data: { studentId },
+          withCredentials: true,
+        }
+      );
       alert("회원이 삭제되었습니다.");
 
       closeModal();
@@ -46,22 +49,36 @@ const SettingPage = () => {
         <span className={styles.text}>설정</span>
       </div>
       <div className={styles.info_section}>
+        {" "}
         <div className={styles.info_item}>
           <div className={styles.icon}>
-            <FaEnvelope />
+            <FaInfoCircle />
           </div>
-          <span className={styles.infoText}> withBuddy@gmail.com</span>
-        </div>
-        <div className={styles.info_item}>
-          <div className={styles.icon}>
+          <span className={styles.infoText}>
+            현재 SNS 아이디 관련하여 딥페이크 이슈로 인해 아이디 공개 기능이
+            삭제되었으며
+            <br />
+            대신 채팅 기능이 추가되었습니다.
+            <br />
+            채팅 내용은 2일마다 자동으로 삭제되오니 이 점 유의해 주시기
+            바랍니다.
+          </span>
+
+          {/* <div className={styles.icon}>
             <FaGithub />
           </div>
 
           <span className={styles.infoText}>
-            <a href="https://github.com/ye-seob/WithBuddy">
-              https://github.com/ye-seob/WithBuddy
+            <a href="https://github.com/ye-seob/">
+              https://github.com/ye-seob/
             </a>
-          </span>
+          </span> */}
+        </div>
+        <div className={styles.info_item}>
+          <div className={styles.icon}>
+            <FaEnvelope />
+          </div>
+          <span className={styles.infoText}> skuwithBuddy@gmail.com</span>
         </div>
         <div className={styles.info_item}>
           <div className={styles.icon}>
