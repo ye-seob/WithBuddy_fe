@@ -75,11 +75,17 @@ const ChatPage: React.FC = () => {
 
       <div className={styles.messages_section}>
         {messages.map((msg, index) => (
-          <div key={index} className={styles.message}>
+          <div
+            key={index}
+            className={`${styles.message} ${
+              msg.studentId === studentId ? styles.right : styles.left
+            }`}
+          >
             <div>
-              <strong>{msg.studentId}</strong>
+              <strong>{msg.studentId.slice(2, 4)}학번 </strong>
             </div>
-            <div>{msg.message}</div>
+
+            <div> {msg.message}</div>
             <div className={styles.timestamp}>
               {new Date(msg.timestamp).toLocaleTimeString()}
             </div>

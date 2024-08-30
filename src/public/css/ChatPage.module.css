@@ -31,11 +31,25 @@
 .message {
   padding: 10px;
   margin-bottom: 10px;
-  background-color: white;
+  background-color: #eaf2d8;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex; /* Flex를 사용하여 내용을 감쌉니다 */
+  align-items: center; /* 수직 정렬 */
+  width: fit-content; /* 텍스트의 길이에 맞게 크기 조정 */
+  word-break: break-word; /* 긴 단어를 줄바꿈 처리 */
+}
+.message.right {
+  background-color: #c6d1ae;
+  align-self: flex-end;
+  text-align: right;
 }
 
+.message.left {
+  background-color: #eaf2d8;
+  align-self: flex-start;
+  text-align: left;
+}
 .timestamp {
   font-size: 0.75em;
   color: #888;
