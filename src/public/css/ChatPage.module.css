@@ -92,8 +92,9 @@
   background-color: #c6d1ae;
   color: white;
   cursor: pointer;
-  width: 8rem;
+  width: 7rem;
   height: 45px;
+  white-space: nowrap;
 }
 
 .send_button:hover {
