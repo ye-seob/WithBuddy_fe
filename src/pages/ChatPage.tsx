@@ -20,7 +20,7 @@ const ChatPage: React.FC = () => {
 
   useEffect(() => {
     const newSocket = io("https://api.skuwithbuddy.com");
-    // const newSocket = io("http://localhost:3000");
+    //const newSocket = io("http://localhost:3000");
     setSocket(newSocket);
 
     newSocket.on("connect", () => {

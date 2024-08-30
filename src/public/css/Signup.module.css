@@ -50,7 +50,12 @@
 }
 
 .select_container {
-  width: 345px;
+  width: 350px;
+}
+@media (max-width: 480px) {
+  .select_container {
+    width: 300px;
+  }
 }
 
 .select {
