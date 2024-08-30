@@ -15,3 +15,8 @@
 .input:read-only:hover {
   border-color: #999;
 }
+@media (max-width: 480px) {
+  .input {
+    width: 300px;
+  }
+}
