@@ -14,8 +14,8 @@ import AlertMessage from "../components/AlertMessage";
 interface ProfileProps {
   studentId: string;
   name: string;
-  // instaId: string | undefined;
-  // kakaoId: string | undefined;
+   instaId: string | undefined;
+  kakaoId: string | undefined;
   mbti: string;
   bio: string | JSX.Element | undefined;
 }
