@@ -9,7 +9,8 @@ import { mbtiList } from "../util/mbti";
 import { majors } from "../util/major.ts";
 import AlertMessage from "../components/AlertMessage";
 import { useNavigate } from "react-router-dom";
-//새 창 여는 함수
+
+// 새 창 여는 함수
 const openInNewTab = (url: string) => {
   window.open(url, "_blank", "noopener,noreferrer");
 };
@@ -17,8 +18,9 @@ const openInNewTab = (url: string) => {
 Modal.setAppElement("#root");
 
 const Signup = () => {
-  //상태 관리
   const navigate = useNavigate();
+
+  // 상태 관리
   const [name, setName] = useState("");
   const [studentId, setStudentId] = useState("");
   const [major, setMajor] = useState("소프트웨어학과");
@@ -30,19 +32,30 @@ const Signup = () => {
   const [kakaoId, setKakaoId] = useState("제공되지 않는 서비스입니다");
   const [mbti, setMbti] = useState("");
   const [bio, setBio] = useState("");
+
   const [checkedAuthCode, setCheckedAuthCode] = useState(false);
   const [isAgreed, setIsAgreed] = useState(false);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [alertMessage, setAlertMessage] = useState("");
   const [alertErrorMessage, setAlertErrorMessage] = useState("");
 
-  //유효성 검사
+  const [isLoading, setIsLoading] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  // 유효성 검사
   const validate = (): boolean => {
-    if (!/^[0-9]{10}$/.test(studentId)) {
+    if (!/\S/.test(name)) {
+      setAlertErrorMessage("이름을 올바르게 입력해주세요.");
+      return false;
+    }
+
+    if (!/^[0-9]+$/.test(studentId)) {
       setAlertErrorMessage("학번을 올바르게 입력해주세요.");
       return false;
     }
+
     if (!/^[0-9]{4}$/.test(pin)) {
       setAlertErrorMessage("PIN 번호는 4자리 숫자여야 합니다.");
       return false;
@@ -63,12 +76,6 @@ const Signup = () => {
       setAlertErrorMessage("인증번호 불일치");
       return false;
     }
-    // if (!instaId && !kakaoId) {
-    //   setAlertErrorMessage(
-    //     "인스타그램 또는 카카오톡 아이디를 하나 이상 입력해주세요."
-    //   );
-    //   return false;
-    // }
     if (!isAgreed) {
       setAlertErrorMessage("이용약관 및 개인정보처리방침에 동의해야 합니다.");
       return false;
@@ -76,18 +83,48 @@ const Signup = () => {
     return true;
   };
 
+  const handleSendMail = async () => {
+    if (isDisabled) return;
+    setIsDisabled(true);
+    setTimeout(() => setIsDisabled(false), 4000);
+
+    try {
+      if (!/^[\w-.]+@skuniv\.ac\.kr$/.test(email)) {
+        setAlertErrorMessage("유효한 서경 이메일을 입력해주세요.");
+        return false;
+      }
+      setIsLoading(true);
+      const result = await sendMail(email);
+      setIsLoading(false);
+      if (result !== 200) {
+        setAlertErrorMessage("메일 전송에 실패하였습니다.");
+      } else {
+        setAlertMessage("전송되었습니다.");
+      }
+    } catch (error) {
+      setIsLoading(false);
+      setAlertErrorMessage("메일 전송에 실패하였습니다.");
+    }
+  };
+
   const handleAuthCodeSubmit = async () => {
+    if (isDisabled) return;
+    setIsDisabled(true);
+    setTimeout(() => setIsDisabled(false), 4000);
+
     try {
       const response = await checkAuthCode(email, authCode);
       if (response === "200") {
         setCheckedAuthCode(true);
         setAlertMessage("인증 성공");
+        setIsDisabled(true);
       } else {
         setAlertErrorMessage("인증에 실패했습니다");
       }
     } catch (error) {
+      setIsLoading(false);
       console.error(error);
-      setAlertErrorMessage("오류가 발생하였습니다.");
+      setAlertErrorMessage("인증에 실패했습니다.");
     }
   };
 
@@ -111,8 +148,7 @@ const Signup = () => {
         mbti,
         bio,
       });
-
-      alert(response);
+      setAlertMessage(response);
       setIsModalOpen(false);
       navigate(0);
     } catch (error) {
@@ -130,18 +166,6 @@ const Signup = () => {
 
   const handleMajorChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setMajor(e.target.value);
-  };
-
-  const handleSendMail = async () => {
-    try {
-      const result = await sendMail(email);
-      if (result != 200) {
-        setAlertErrorMessage("메일 전송에 실패하였습니다.");
-      }
-      setAlertMessage("전송되었습니다.");
-    } catch (error) {
-      setAlertErrorMessage("메일 전송에 실패하였습니다.");
-    }
   };
 
   return (
@@ -193,7 +217,11 @@ const Signup = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <Button text="전송" onClick={handleSendMail} />
+        <Button
+          text={isLoading ? "전송 중.." : "전송"}
+          onClick={handleSendMail}
+          disabled={isDisabled || isLoading}
+        />
       </div>
       <div className={styles.input_with_button}>
         <Input
@@ -202,7 +230,11 @@ const Signup = () => {
           value={authCode}
           onChange={(e) => setAuthCode(e.target.value)}
         />
-        <Button text="확인" onClick={handleAuthCodeSubmit} />
+        <Button
+          text="확인"
+          onClick={handleAuthCodeSubmit}
+          disabled={isDisabled || isLoading}
+        />
       </div>
 
       <label className={styles.label}>SNS 아이디</label>

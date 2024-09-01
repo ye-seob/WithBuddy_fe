@@ -22,16 +22,13 @@ const ChatPage: React.FC = () => {
     setSocket(newSocket);
 
     newSocket.on("connect", () => {
-      // 방에 참가하고 이전 메시지 요청
       newSocket.emit("join room", { major, studentId });
     });
 
-    // 이전 메시지 수신
     newSocket.on("previous messages", (msgs: ChatMessage[]) => {
       setMessages(msgs);
     });
 
-    // 새로운 메시지 수신
     newSocket.on("chat message", (msg: ChatMessage) => {
       setMessages((prevMessages) => [...prevMessages, msg]);
     });
