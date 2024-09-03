@@ -55,6 +55,7 @@ const ChatPage: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     sendMessage();
+    setMessage("");
   };
 
   const getRoomName = (studentId: string) => {
