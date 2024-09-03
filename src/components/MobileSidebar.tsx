@@ -64,7 +64,7 @@ const MobileSidebar: React.FC = () => {
             <div className={styles.icon}>정보 수정</div>
           </Link>
           <Link to="/setting" onClick={closeSidebar}>
-            <div className={styles.icon}>설정</div>
+            <div className={styles.icon}>공지 및 설정</div>
           </Link>
           <div className={styles.icon} onClick={handleLogout}>
             로그아웃

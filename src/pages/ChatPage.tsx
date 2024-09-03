@@ -7,10 +7,11 @@ interface ChatMessage {
   studentId: string;
   message: string;
   timestamp: string;
+  name: string;
 }
 
 const ChatPage: React.FC = () => {
-  const { studentId, major } = useUserStore();
+  const { studentId, major, name } = useUserStore();
   const [message, setMessage] = useState<string>("");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [socket, setSocket] = useState<Socket | null>(null);
@@ -22,7 +23,7 @@ const ChatPage: React.FC = () => {
     setSocket(newSocket);
 
     newSocket.on("connect", () => {
-      newSocket.emit("join room", { major, studentId });
+      newSocket.emit("join room", { major, studentId, name });
     });
 
     newSocket.on("previous messages", (msgs: ChatMessage[]) => {
@@ -36,7 +37,7 @@ const ChatPage: React.FC = () => {
     return () => {
       newSocket.disconnect();
     };
-  }, [studentId, major]);
+  }, [studentId, major, name]);
 
   useEffect(() => {
     if (messagesEndRef.current) {
@@ -46,7 +47,7 @@ const ChatPage: React.FC = () => {
 
   const sendMessage = () => {
     if (socket) {
-      socket.emit("chat message", { studentId, major, message }, () => {
+      socket.emit("chat message", { studentId, major, message, name }, () => {
         setMessage("");
       });
     }
@@ -55,7 +56,6 @@ const ChatPage: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     sendMessage();
-    setMessage("");
   };
 
   return (
@@ -75,7 +75,12 @@ const ChatPage: React.FC = () => {
             }`}
           >
             <div>
-              <strong>{msg.studentId.slice(2, 4)}학번 </strong>
+              <span style={{ fontSize: "1rem", fontWeight: 600 }}>
+                {msg.name}{" "}
+                <span style={{ fontSize: "0.7rem" }}>
+                  ({msg.studentId.slice(2, 4)}학번)
+                </span>
+              </span>
             </div>
             <div> {msg.message}</div>
             <div className={styles.timestamp}>

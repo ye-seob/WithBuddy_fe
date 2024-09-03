@@ -60,19 +60,16 @@ const SettingPage = () => {
             <br />
             대신 채팅 기능이 추가되었습니다.
             <br />
-            채팅 내용은 2일마다 자동으로 삭제되오니 이 점 유의해 주시기
-            바랍니다.
           </span>
-
-          {/* <div className={styles.icon}>
-            <FaGithub />
+        </div>
+        <div className={styles.info_item}>
+          <div className={styles.icon}>
+            <FaInfoCircle />
           </div>
-
           <span className={styles.infoText}>
-            <a href="https://github.com/ye-seob/">
-              https://github.com/ye-seob/
-            </a>
-          </span> */}
+            매칭률이 10% 미만으로 나타나 매칭을 1~20번, 21~49번과 같이 그룹
+            형태로 조정하였습니다. <br />
+          </span>
         </div>
         <div className={styles.info_item}>
           <div className={styles.icon}>
