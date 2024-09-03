@@ -46,10 +46,9 @@ const ChatPage: React.FC = () => {
   }, [messages]);
 
   const sendMessage = () => {
-    if (socket) {
-      socket.emit("chat message", { studentId, major, message, name }, () => {
-        setMessage("");
-      });
+    if (socket && message.trim() !== "") {
+      socket.emit("chat message", { studentId, major, message, name });
+      setMessage("");
     }
   };
 
@@ -65,7 +64,7 @@ const ChatPage: React.FC = () => {
     if (lastThree >= 40 && lastThree <= 59) return "3번방";
     if (lastThree >= 60 && lastThree <= 90) return "4번방";
     if (lastThree > 90 && lastThree <= 200) return "5번방";
-    return "적절한 방이 없습니다";
+    return "알 수 없는 방";
   };
 
   const roomName = getRoomName(studentId);
@@ -111,7 +110,7 @@ const ChatPage: React.FC = () => {
           className={styles.input}
           onChange={(e) => setMessage(e.target.value)}
         />
-        <button className={styles.send_button} onClick={() => {}}>
+        <button className={styles.send_button} type="submit">
           전송
         </button>
       </form>
