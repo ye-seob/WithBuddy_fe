@@ -58,11 +58,23 @@ const ChatPage: React.FC = () => {
     sendMessage();
   };
 
+  const getRoomName = (studentId: string) => {
+    const lastThree = parseInt(studentId.slice(-3), 10);
+    if (lastThree >= 1 && lastThree <= 19) return "1번방";
+    if (lastThree >= 20 && lastThree <= 39) return "2번방";
+    if (lastThree >= 40 && lastThree <= 59) return "3번방";
+    if (lastThree >= 60 && lastThree <= 90) return "4번방";
+    if (lastThree > 90 && lastThree <= 200) return "5번방";
+    return "적절한 방이 없습니다";
+  };
+
+  const roomName = getRoomName(studentId);
+
   return (
     <div className={styles.chat_container}>
       <div className={styles.header_section}>
         <span className={styles.title}>
-          {major} {studentId.slice(-3)}번
+          {major} {roomName}
         </span>
       </div>
 
