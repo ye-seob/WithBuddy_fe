@@ -7,6 +7,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .title {
@@ -106,14 +107,27 @@
     padding: 0.4rem 0.8rem;
     margin: 0.5rem;
     font-size: 0.9rem;
-
-    .send_button {
-      width: 4rem;
-      height: 40px;
-      font-size: 0.8rem;
-    }
+  }
+  .send_button {
+    width: 4rem;
+    height: 40px;
+    font-size: 0.8rem;
   }
 }
 .send_button:hover {
   background-color: #aab689;
+}
+.back_button {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 8px;
+}
+.back_button:hover {
+  opacity: 0.8;
 }

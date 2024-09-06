@@ -1,24 +1,36 @@
-.header_section {
+.tab_container {
   width: 100%;
-  min-height: 50px;
+  height: 56px;
+  display: flex;
   background-color: #c6d1ae;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
 }
 
-.title {
-  color: white;
+.tab_item {
+  flex: 1;
+  text-align: center;
+  cursor: pointer;
+  padding: 16px 0;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  color: #4a4a4a;
+}
+
+.tab_item.active {
+  border-bottom: 4px solid #8da55a;
   font-weight: bold;
 }
 
-.profiles_section {
+.form_container {
+  width: 400px;
+  height: 400px;
+  max-height: 400px;
+
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
-  height: 4000px;
   padding: 40px;
   justify-content: space-between;
   overflow-y: auto;
@@ -29,4 +41,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.form_container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.form_container::-webkit-scrollbar-thumb {
+  background-color: #c6d1ae;
+  border-radius: 4px;
+}
+
+.form_container::-webkit-scrollbar-track {
+  background-color: #d2d2d2;
 }

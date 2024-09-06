@@ -16,6 +16,7 @@ import PrivacyPolicy from "./util/PrivacyPolicy";
 import TermsAndConditions from "./util/TermsAndConditions";
 import GuidePage from "./pages/GuidePage";
 import ChatPage from "./pages/ChatPage";
+import RoomListPage from "./pages/RoomListPage";
 
 const App = () => {
   return (
@@ -32,11 +33,13 @@ const App = () => {
               <Routes>
                 <Route path="/login" element={<MainPage />} />
                 <Route path="/match" element={<MatchPage />} />
-                <Route path="/chat" element={<ChatPage />} />
+                <Route path="/roomList" element={<RoomListPage />} />
+                <Route path="/chat/:studentId" element={<ChatPage />} />
                 <Route path="/edit" element={<EditPage />} />
                 <Route path="/ranking" element={<RankingPage />} />
                 <Route path="/setting" element={<SettingPage />} />
                 <Route path="/findPin" element={<FindPinPage />} />
+
                 <Route path="*" element={<Navigate to="/login" replace />} />
               </Routes>
             </Layout>

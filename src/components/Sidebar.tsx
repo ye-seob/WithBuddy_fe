@@ -35,7 +35,7 @@ const Sidebar: React.FC = () => {
           <CiBoxList />
         </div>
       </Link>
-      <Link to="/chat">
+      <Link to="/roomList">
         <div className={styles.icon}>
           <CiChat2 />
         </div>

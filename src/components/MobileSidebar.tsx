@@ -57,7 +57,7 @@ const MobileSidebar: React.FC = () => {
           <Link to="/ranking" onClick={closeSidebar}>
             <div className={styles.icon}>랭킹</div>
           </Link>
-          <Link to="/chat" onClick={closeSidebar}>
+          <Link to="/roomList" onClick={closeSidebar}>
             <div className={styles.icon}>채팅</div>
           </Link>
           <Link to="/edit" onClick={closeSidebar}>

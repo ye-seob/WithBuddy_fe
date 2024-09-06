@@ -2,7 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "../public/css/ChatPage.module.css";
 import { useUserStore } from "../stores/userStore";
 import { io, Socket } from "socket.io-client";
-
+import { useLocation, useNavigate } from "react-router-dom";
+import { BuddyData } from "./RoomListPage";
+import { CiCircleChevLeft } from "react-icons/ci";
 interface ChatMessage {
   studentId: string;
   message: string;
@@ -16,14 +18,20 @@ const ChatPage: React.FC = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [socket, setSocket] = useState<Socket | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const roomBuddy = location.state as BuddyData;
 
   useEffect(() => {
     const newSocket = io("https://api.skuwithbuddy.com");
-    //const newSocket = io("http://localhost:3000");
     setSocket(newSocket);
 
     newSocket.on("connect", () => {
-      newSocket.emit("join room", { major, studentId, name });
+      const room = `${Math.min(
+        parseInt(studentId),
+        parseInt(roomBuddy.studentId)
+      )}-${Math.max(parseInt(studentId), parseInt(roomBuddy.studentId))}`;
+      newSocket.emit("join room", room);
     });
 
     newSocket.on("previous messages", (msgs: ChatMessage[]) => {
@@ -37,7 +45,7 @@ const ChatPage: React.FC = () => {
     return () => {
       newSocket.disconnect();
     };
-  }, [studentId, major, name]);
+  }, [studentId, major, roomBuddy.studentId]);
 
   useEffect(() => {
     if (messagesEndRef.current) {
@@ -47,9 +55,18 @@ const ChatPage: React.FC = () => {
 
   const sendMessage = () => {
     if (socket && message.trim() !== "") {
-      socket.emit("chat message", { studentId, major, message, name });
+      socket.emit("chat message", {
+        studentId,
+        major,
+        message,
+        name,
+        roomBuddyId: roomBuddy.studentId,
+      });
       setMessage("");
     }
+  };
+  const handleBack = () => {
+    navigate("/roomlist");
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -58,23 +75,14 @@ const ChatPage: React.FC = () => {
     setMessage("");
   };
 
-  const getRoomName = (studentId: string) => {
-    const lastThree = parseInt(studentId.slice(-3), 10);
-    if (lastThree >= 1 && lastThree <= 19) return "1번방";
-    if (lastThree >= 20 && lastThree <= 39) return "2번방";
-    if (lastThree >= 40 && lastThree <= 59) return "3번방";
-    if (lastThree >= 60 && lastThree <= 90) return "4번방";
-    if (lastThree > 90 && lastThree <= 200) return "5번방";
-    return "알 수 없는 방";
-  };
-
-  const roomName = getRoomName(studentId);
-
   return (
     <div className={styles.chat_container}>
       <div className={styles.header_section}>
+        <button onClick={handleBack} className={styles.back_button}>
+          <CiCircleChevLeft size={24} />
+        </button>
         <span className={styles.title}>
-          {major} {roomName}
+          {roomBuddy.major} - {roomBuddy.name}
         </span>
       </div>
 
