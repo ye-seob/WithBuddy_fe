@@ -59,8 +59,7 @@ const SettingPage = () => {
             삭제되었으며
             <br />
             대신 채팅 기능이 추가되었습니다.
-            <br />
-            채팅은 2일마다 자동 삭제 되오니 이 점 유의하시길 바랍니다
+          
           </span>
         </div>
         <div className={styles.info_item}>
