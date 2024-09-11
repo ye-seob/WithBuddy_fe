@@ -21,8 +21,8 @@ const ChatPage: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const roomBuddy = location.state as BuddyData;
-
   useEffect(() => {
+    // 소켓 초기화 코드
     const newSocket = io("https://api.skuwithbuddy.com");
     setSocket(newSocket);
 
@@ -34,14 +34,34 @@ const ChatPage: React.FC = () => {
       newSocket.emit("join room", room);
     });
 
+    // 기존 메시지 수신
     newSocket.on("previous messages", (msgs: ChatMessage[]) => {
       setMessages(msgs);
     });
 
+    // 새로운 메시지 수신 및 알림 표시
     newSocket.on("chat message", (msg: ChatMessage) => {
       setMessages((prevMessages) => [...prevMessages, msg]);
+
+      // 메시지 수신 시 알림 표시
+      if (Notification.permission === "granted") {
+        new Notification(`${msg.name}`, {
+          body: msg.message,
+          //icon: "/path/to/icon.png",
+        });
+      } else if (Notification.permission !== "denied") {
+        Notification.requestPermission().then((permission) => {
+          if (permission === "granted") {
+            new Notification(`${msg.name}`, {
+              body: msg.message,
+              icon: "/path/to/icon.png",
+            });
+          }
+        });
+      }
     });
 
+    // 컴포넌트 언마운트 시 소켓 연결 해제
     return () => {
       newSocket.disconnect();
     };

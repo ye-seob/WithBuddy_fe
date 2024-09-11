@@ -68,7 +68,7 @@ const SettingPage = () => {
           </div>
           <span className={styles.infoText}>
             매칭률이 10% 미만으로 나타나 매칭을 1~20번, 21~49번과 같이 그룹
-            형태로 조정하였습니다. <br />
+            매칭과 개인 매칭으로 분리하였습니다. <br />
           </span>
         </div>
         <div className={styles.info_item}>
