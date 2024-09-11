@@ -1,4 +1,3 @@
-// 클라이언트 코드 수정 (알림 처리 추가)
 import React, { useEffect, useRef, useState } from "react";
 import styles from "../public/css/ChatPage.module.css";
 import { useUserStore } from "../stores/userStore";
@@ -6,7 +5,6 @@ import { io, Socket } from "socket.io-client";
 import { useLocation, useNavigate } from "react-router-dom";
 import { BuddyData } from "./RoomListPage";
 import { CiCircleChevLeft } from "react-icons/ci";
-
 interface ChatMessage {
   studentId: string;
   message: string;
@@ -23,7 +21,6 @@ const ChatPage: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const roomBuddy = location.state as BuddyData;
-
   useEffect(() => {
     // 소켓 초기화 코드
     const newSocket = io("https://api.skuwithbuddy.com");
@@ -37,21 +34,14 @@ const ChatPage: React.FC = () => {
       newSocket.emit("join room", room);
     });
 
+    // 기존 메시지 수신
     newSocket.on("previous messages", (msgs: ChatMessage[]) => {
       setMessages(msgs);
     });
 
+    // 새로운 메시지 수신 및 알림 표시
     newSocket.on("chat message", (msg: ChatMessage) => {
       setMessages((prevMessages) => [...prevMessages, msg]);
-    });
-
-    newSocket.on("notification", (notification) => {
-      alert(`${notification.title}: ${notification.message}`);
-      if (Notification.permission === "granted") {
-        new Notification(notification.title, {
-          body: notification.message,
-        });
-      }
     });
 
     // 컴포넌트 언마운트 시 소켓 연결 해제
@@ -78,7 +68,6 @@ const ChatPage: React.FC = () => {
       setMessage("");
     }
   };
-
   const handleBack = () => {
     navigate("/roomlist");
   };
