@@ -1,4 +1,3 @@
-// src/api/mail.ts
 import axios from "axios";
 
 export const sendMail = async (email: string) => {

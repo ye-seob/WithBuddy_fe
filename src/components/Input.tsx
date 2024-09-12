@@ -6,7 +6,6 @@ interface InputProps {
   value: string;
   readOnly?: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onKeyPress?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -15,7 +14,6 @@ const Input: React.FC<InputProps> = ({
   value,
   readOnly = false,
   onChange,
-  onKeyPress,
 }) => {
   return (
     <input
@@ -24,7 +22,6 @@ const Input: React.FC<InputProps> = ({
       value={value}
       readOnly={readOnly}
       onChange={onChange}
-      onKeyPress={onKeyPress}
       className={styles.input}
     />
   );

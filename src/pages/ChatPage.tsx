@@ -34,17 +34,14 @@ const ChatPage: React.FC = () => {
       newSocket.emit("join room", room);
     });
 
-    // 기존 메시지 수신
     newSocket.on("previous messages", (msgs: ChatMessage[]) => {
       setMessages(msgs);
     });
 
-    // 새로운 메시지 수신 및 알림 표시
     newSocket.on("chat message", (msg: ChatMessage) => {
       setMessages((prevMessages) => [...prevMessages, msg]);
     });
 
-    // 컴포넌트 언마운트 시 소켓 연결 해제
     return () => {
       newSocket.disconnect();
     };
